@@ -10,6 +10,8 @@ import java.util.LinkedList;
 
 import sistemskeoperacije.SODodajValutu;
 import sistemskeoperacije.SOIzvrsiTransakciju;
+import sistemskeoperacije.SOObrisiValutu;
+import sistemskeoperacije.SOSacuvajUFajl;
 import sistemskeoperacije.SOUcitajIzFajla;
 
 public class Menjacnica implements MenjacnicaInterface {
@@ -23,10 +25,7 @@ public class Menjacnica implements MenjacnicaInterface {
 
 	@Override
 	public void obrisiValutu(Valuta valuta) {
-		if (!kursnaLista.contains(valuta))
-			throw new RuntimeException("Valuta ne postoji u kursnoj listi");
-
-		kursnaLista.remove(valuta);
+		SOObrisiValutu.izvrsi(valuta, kursnaLista);
 	}
 
 	@Override
@@ -46,15 +45,7 @@ public class Menjacnica implements MenjacnicaInterface {
 
 	@Override
 	public void sacuvajUFajl(String putanja) {
-		try {
-			ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(putanja)));
-
-			out.writeObject(kursnaLista);
-
-			out.close();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		SOSacuvajUFajl.izvrsi(putanja, kursnaLista);
 	}
 
 }

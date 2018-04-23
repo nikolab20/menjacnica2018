@@ -9,7 +9,7 @@ import menjacnica.Valuta;
 
 public class SOSacuvajUFajl {
 
-	public void sacuvajUFajl(String putanja, LinkedList<Valuta> kursnaLista) {
+	public static void izvrsi(String putanja, LinkedList<Valuta> kursnaLista) {
 		try (ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(putanja)))) {
 
 			out.writeObject(kursnaLista);
